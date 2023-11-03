@@ -8,7 +8,7 @@ resource "google_compute_instance" "default" {
   machine_type = "e2-micro"
   zone         = "us-west1-a"
 
-  tags = ["foo", "bar"]
+  tags = ["test"]
 
   boot_disk {
     initialize_params {
