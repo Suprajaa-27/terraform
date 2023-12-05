@@ -1,5 +1,6 @@
-bucket        = "s3-bucket-to-trigger-lambda-function"
+
 region        = "eu-north-1"
 function_name = "s3-trigger-lambda-function"
 handler       = "lambda_function.lambda_handler"
 runtime       = "python3.11"
+s3_bucket        = "s3-bucket-to-trigger-lambda-function"
