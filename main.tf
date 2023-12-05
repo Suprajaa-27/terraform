@@ -12,14 +12,6 @@ module "lambda_s3_trigger" {
   filter_suffix  = var.filter_suffix
 }
 
-module "lambda_iam" {
-  source = "./modules/iam_lambda"
-
-
-  lambda_function_name = module.lambda_s3_trigger.aws_lambda_function_name
-  s3_bucket_arn        = module.lambda_s3_trigger.s3_bucket_arn
-}
-
 
 
 
