@@ -1,5 +1,7 @@
 name: Terraform CI/CD
 
+#To do : branch protection rule , auto pr , to push through only feature branch , approval for pr
+
 on:
   push:
     branches:
