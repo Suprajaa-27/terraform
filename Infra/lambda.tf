@@ -1,5 +1,5 @@
 # creating zip file
-data "archive file" "zip python code"{
+data "archive_file" "zip_python_code"{
     type = "zip"
     source_dir = "${path.module}/src"
     output_path = "${path.module}/src/lambda_function.zip"
