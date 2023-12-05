@@ -81,7 +81,7 @@ resource "aws_iam_role_policy_attachment" "lambda_s3_policy_attachment" {
 resource "aws_lambda_permission" "s3_trigger_permission" {
   statement_id  = "AllowExecutionFromS3Bucket"
   action        = "lambda:InvokeFunction"
-  function_name = "${aws_iam_role.aws_lambda_role.function_name}"
+  function_name = aws_iam_role.aws_lambda_role.function_name
   principal     = "s3.amazonaws.com"
   source_arn    = "${aws_s3_bucket.s3_bucket.arn}"
 }
