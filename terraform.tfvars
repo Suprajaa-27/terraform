@@ -1,3 +1,3 @@
-bucket = "s3_trigger_bucket"
+bucket = "s3-trigger-bucket"
 
 region = "eu-north-1"
