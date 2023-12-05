@@ -1,5 +1,5 @@
-module "s3_lambda" {
-    source = "./infra"
+module "s3_bucket" {
+    source = "./Infra"
     bucket = var.bucket
     region = var.region
 
