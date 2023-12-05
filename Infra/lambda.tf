@@ -10,7 +10,7 @@ resource "aws_lambda_function" "s3_trigger_lambda" {
   function_name = "s3-trigger-lambda-function"
   handler      = "lambda_function.lambda_handler"
   runtime      = "python3.11"
-  role         = var.lambda_arn
+  role         = aws_iam_role.aws_lambda_role.arn
   filename     = "${path.module}/src/lambda_function.zip"
 
 }
