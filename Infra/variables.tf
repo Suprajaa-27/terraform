@@ -8,7 +8,7 @@ variable region {
     description = "Region in which terraform will be deployed"
 }
 
-variable lambda_iam_role_arn  {
+variable lambda_arn  {
     type = string
     description = "Role arn"
 }
