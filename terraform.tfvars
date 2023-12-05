@@ -1,3 +1,3 @@
-bucket = "s3-trigger-bucket-sup"
+bucket = "s3-bucket-lambda-trigger"
 
 region = "eu-north-1"
