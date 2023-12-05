@@ -29,8 +29,7 @@ resource "aws_iam_policy" "iam_policy_for_lambda" {
         Effect   = "Allow",
         Action   = ["s3:GetObject", "s3:ListBucket", "s3:PutObject"],
         Resource = [
-          "${module.aws_s3_bucket.s3_bucket.arn}",
-          "${module.aws_s3_bucket.s3_bucket.arn}/*",
+          var.s3_bucket_arn
         ],
       },
     ],

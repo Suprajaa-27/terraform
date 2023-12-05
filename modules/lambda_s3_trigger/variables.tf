@@ -44,3 +44,7 @@ variable "s3_bucket" {
   default = "s3_to_trigger_lambda"
    
 }
+
+variable "s3_bucket_id" {
+  description = "S3 bucket to trigger lambda function when a json file is created"
+}
