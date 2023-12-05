@@ -1,4 +1,4 @@
-module "s3_bucket" {
+module "infra" {
     source = "./Infra"
     bucket = var.bucket
     region = var.region
