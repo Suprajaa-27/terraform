@@ -1,3 +1,3 @@
-# bucket = "s3-trigger-bucket-sup"
+bucket = "s3-trigger-bucket-sup"
 
-# region = "eu-north-1"
+region = "eu-north-1"
