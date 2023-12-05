@@ -3,6 +3,6 @@ output "s3_bucket_arn" {
 }
 
 output "lambda_function_name" {
-    value = aws_lambda_function.s3_trigger_lambda.name
+    value = aws_lambda_function.s3_trigger_lambda.function_name
     description = "The name of the Lambda Function"
 }
