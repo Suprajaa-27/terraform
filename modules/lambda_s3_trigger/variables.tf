@@ -24,10 +24,6 @@ variable "filename" {
   description = "The path to the Lambda function deployment package (ZIP file)."
 }
 
-variable "s3_bucket_id" {
-  description = "The ID of the S3 bucket."
-}
-
 variable "trigger_events" {
   description = "List of S3 trigger events."
   default     = ["s3:ObjectCreated:*"]

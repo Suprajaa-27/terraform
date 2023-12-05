@@ -20,6 +20,18 @@ variable "runtime" {
   description = "The Lambda function runtime."
 }
 
-variable "role_name" {
-  description = "Name of the IAM role for the Lambda function."
+variable "filter_prefix" {
+  description = "Prefix filter for S3 events."
+  default     = ""
 }
+
+variable "filter_suffix" {
+  description = "Suffix filter for S3 events."
+  default     = ".json"
+}
+
+variable "trigger_events" {
+  description = "List of S3 trigger events."
+  default     = ["s3:ObjectCreated:*"]
+}
+
