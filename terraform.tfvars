@@ -1,3 +1,3 @@
-bucket = "s3-trigger-bucket-for-coding"
+bucket = "s3-trigger-bucket"
 
 region = "eu-north-1"
