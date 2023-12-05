@@ -20,11 +20,12 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
     - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-          role-to-assume: arn:aws:iam::388921471165:role/guithub-to-aws-oicd
-          aws-region: us-north-1
+      uses: aws-actions/configure-aws-credentials@v3
+      with:
+        role-to-assume: arn:aws:iam::388921471165:role/guithub-to-aws-oicd
+        aws-region: us-north-1
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
