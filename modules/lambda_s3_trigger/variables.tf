@@ -4,7 +4,7 @@ variable "region" {
   description = "Region in which lambda function and bcuket will be created."
 }
 
-variable "function_name" {
+variable "lambda_function_name" {
   description = "The name of the Lambda Function."
 }
 
