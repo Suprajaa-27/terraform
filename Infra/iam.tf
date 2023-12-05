@@ -18,7 +18,7 @@ resource "aws_iam_role" "aws_lambda_role" {
 
 resource "aws_iam_policy" "iam_policy_for_lambda" {
 
-  name         = "aws_iam_policy_for_aws_lambda_role"
+  name         = "aws_iam_policy_aws_lambda_role"
   path         = "/"
   description  = "AWS IAM Policy for managing aws lambda role"
   policy = <<EOF
@@ -46,8 +46,8 @@ resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
   policy_arn  = aws_iam_policy.iam_policy_for_lambda.arn
 }
 
-resource "aws_iam_policy" "s3_access_policy" {
-  name        = "s3_access_policy"
+resource "aws_iam_policy" "s3_policy" {
+  name        = "s3_policy"
   description = "Policy for Lambda to access S3"
   
   # Define the policy document with appropriate permissions for S3 access
@@ -72,7 +72,7 @@ EOF
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_s3_policy_attachment" {
-  policy_arn = aws_iam_policy.s3_access_policy.arn
+  policy_arn = aws_iam_policy.s3_policy.arn
   role       = aws_iam_role.aws_lambda_role.name
 }
 
