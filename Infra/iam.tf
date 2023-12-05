@@ -48,7 +48,7 @@ resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
 
 resource "aws_iam_policy" "s3_policy" {
   name        = "s3_policy"
-  description = "Policy for Lambda to access S3"
+  description = "Policy for Lambda function to access S3"
   
   # Define the policy document with appropriate permissions for S3 access
   policy = <<EOF
@@ -71,6 +71,41 @@ resource "aws_iam_policy" "s3_policy" {
 EOF
 }
 
+resource "aws_iam_policy" "s3_to_invoke_lambda_policy" {
+  name        = "s3_to_invoke_lambda"
+  description = "Permissions for Amazon S3 to invoke Lambda function"
+
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Id": "default",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "s3.amazonaws.com"
+      },
+      "Action": "lambda:InvokeFunction",
+      "Resource": "aws_lambda_function.s3_trigger_lambda.arn",
+      "Condition": {
+        "StringEquals": {
+          "AWS:SourceAccount": "388921471165"
+        },
+        "ArnLike": {
+          "AWS:SourceArn": "arn:aws:s3:::${aws_s3_bucket.s3_bucket.arn}"
+        }
+      }
+    }
+  ]
+}
+EOF
+}
+
+
+resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
+  policy_arn = aws_iam_policy.s3_to_invoke_lambda_policy.arn
+  role       = aws_iam_role.aws_lambda_role.name
+}
 resource "aws_iam_role_policy_attachment" "lambda_s3_policy_attachment" {
   policy_arn = aws_iam_policy.s3_policy.arn
   role       = aws_iam_role.aws_lambda_role.name
@@ -82,6 +117,6 @@ resource "aws_lambda_permission" "s3_trigger_permission" {
   function_name = aws_lambda_function.s3_trigger_lambda.function_name
   principal     = "s3.amazonaws.com"
   
-  source_arn = "${aws_s3_bucket.s3_bucket.arn}/"
+  source_arn = "${aws_s3_bucket.s3_bucket.arn}"
 }
 
