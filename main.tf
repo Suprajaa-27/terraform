@@ -1,5 +1,6 @@
 module "lambda_s3_trigger" {
   source         = "./modules/lambda_s3_trigger"
+  bucket_name = var.bucket_name
   region         = var.region
   lambda_function_name  = var.function_name
   handler        = var.handler
