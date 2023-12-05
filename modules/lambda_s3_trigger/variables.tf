@@ -40,7 +40,7 @@ variable "filter_suffix" {
   default     = ".json"
 }
 
-variable "s3_bucket" {
+variable "bucket_name" {
   description = "S3 bucket to trigger lambda function when a json file is created"
   default = "s3_to_trigger_lambda"
    

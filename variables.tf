@@ -1,4 +1,4 @@
-variable s3_bucket {
+variable bucket_name {
     type = string
     description = "Bucket where files are uploaded to trigger lambda function"
 }
