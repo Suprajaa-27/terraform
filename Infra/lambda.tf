@@ -1,8 +1,8 @@
 # creating zip file
 data "archive_file" "zip_python_code"{
     type = "zip"
-    source_dir = "${path.module}/src"
-    output_path = "${path.module}/src/lambda_function.zip"
+    source_dir = "${path.module}/../src"
+    output_path = "${path.module}/lambda_function.zip"
 }
 
 # creating Lambda function
@@ -11,7 +11,7 @@ resource "aws_lambda_function" "s3_trigger_lambda" {
   handler      = "lambda_function.lambda_handler"
   runtime      = "python3.11"
   role         = aws_iam_role.aws_lambda_role.arn
-  filename     = "${path.module}/src/lambda_function.zip"
+  filename     = "${path.module}/lambda_function.zip"
 
 }
 
