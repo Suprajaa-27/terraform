@@ -6,7 +6,7 @@ module "lambda_s3_trigger" {
   runtime        = var.runtime
   role_arn       = module.lambda_iam.iam_role_arn
   filename       = "${path.module}/lambda_function.zip"
-  s3_bucket_id   = module.lambda_s3_trigger.s3_bucket_id
+  s3_bucket_id   = aws_s3_bucket.s3_bucket.id
   trigger_events = var.trigger_events
   filter_prefix  = var.filter_prefix
   filter_suffix  = var.filter_suffix
