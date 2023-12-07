@@ -1,5 +1,6 @@
 # Define an IAM role for the Lambda function
 resource "aws_iam_role" "aws_lambda_role" {
+  count = var.create_resources ? 1 : 0
   name = "aws-lambda-role"
 
   assume_role_policy = jsonencode({
@@ -17,6 +18,7 @@ resource "aws_iam_role" "aws_lambda_role" {
 }
 
 resource "aws_iam_policy" "iam_policy_for_lambda" {
+  count = var.create_resources ? 1 : 0
 
   name        = "aws_iam_policy_for_aws_lambda_role"
   path        = "/"
@@ -42,12 +44,14 @@ EOF
 # Policy Attachment on the role.
 
 resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
+  count = var.create_resources ? 1 : 0
   
   role       = aws_iam_role.aws_lambda_role.name
   policy_arn = aws_iam_policy.iam_policy_for_lambda.arn
 }
 
 resource "aws_iam_policy" "s3_policy" {
+  count = var.create_resources ? 1 : 0
   
   name        = "s3_access_policy"
   description = "Policy for Lambda function to access S3"

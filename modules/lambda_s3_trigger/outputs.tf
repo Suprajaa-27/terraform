@@ -22,5 +22,5 @@ output "s3_bucket_arn" {
 
 output "lambda_role_arn" {
   description = "The arn of lambda role"
-  value       = aws_iam_role.aws_lambda_role.arn
+  value       = aws_iam_role.aws_lambda_role[count.index].arn
 }
