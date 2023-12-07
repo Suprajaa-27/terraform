@@ -80,17 +80,17 @@ EOF
 
 
 resource "aws_iam_role_policy_attachment" "lambda_s3_policy_attachment" {
-  
+  count = var.create_resources ? 1 : 0
   policy_arn = aws_iam_policy.s3_policy[count.index].arn
   role       = aws_iam_role.aws_lambda_role[count.index].name
 }
 
 resource "aws_lambda_permission" "s3_trigger_permission" {
-  
+  count = var.create_resources ? 1 : 0
   statement_id  = "AllowExecutionFromS3Bucket"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.s3_trigger_lambda.function_name
   principal     = "s3.amazonaws.com"
-  source_arn    = aws_s3_bucket.s3_bucket.arn
+  source_arn    = aws_s3_bucket.s3_bucket[count.index].arn
 }
 
