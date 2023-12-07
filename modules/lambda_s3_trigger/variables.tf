@@ -63,13 +63,3 @@ variable "create_bucket" {
   type = bool
   description = "Bool to create bucket"
 }
-
-variable "enable_object_lock" {
-  type = bool
-  description = "Bool to create object lock"
-}
-
-variable "enable_object_protection" {
-  type = bool
-  description = "Bool to create object protection"
-}
