@@ -1,8 +1,10 @@
 # Creating s3 bucket
 resource "aws_s3_bucket" "s3_bucket" {
+  count = var.create_bucket ? 1 : 0
   bucket = var.bucket_name
 }
 resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
+  count = var.create_bucket ? 1 : 0
   bucket = aws_s3_bucket.s3_bucket.id
   rule {
     id = "object-lifecycle-rule"
@@ -23,7 +25,15 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
   }
 }
 
+resource "aws_s3_bucket_versioning" "versioning_example" {
+  count = var.create_bucket ? 1 : 0
+  bucket = aws_s3_bucket.example.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
 resource "aws_s3_bucket_object_lock_configuration" "example" {
+  count = var.create_bucket ? 1 : 0
   bucket = aws_s3_bucket.example.id
 
   rule {
