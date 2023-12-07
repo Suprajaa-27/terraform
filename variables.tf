@@ -39,7 +39,7 @@ variable "trigger_events" {
 variable "filename" {
   description = "The path to the Lambda function deployment package (ZIP file)."
 }
-variable "create_bucket" {
+variable "create_resources" {
   type        = bool
   description = "Bool to create bucket"
 }

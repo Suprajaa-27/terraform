@@ -7,6 +7,7 @@ resource "aws_lambda_function" "s3_trigger_lambda" {
 }
 
 resource "aws_s3_bucket_notification" "s3_event_trigger" {
+  count = var.create_resources ? 1 : 0
   bucket = aws_s3_bucket.s3_bucket[count.index].id
 
   lambda_function {

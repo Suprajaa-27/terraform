@@ -12,12 +12,12 @@ output "s3_trigger_id" {
 
 output "s3_bucket_id" {
   description = "The ID of s3 bucket."
-  value       = aws_s3_bucket.s3_bucket[count.index].id
+  value       = aws_s3_bucket.s3_bucket.id
 }
 
 output "s3_bucket_arn" {
   description = "The arn of s3 bucket."
-  value       = aws_s3_bucket.s3_bucket[count.index].arn
+  value       = aws_s3_bucket.s3_bucket.arn
 }
 
 output "lambda_role_arn" {

@@ -62,7 +62,7 @@ variable "lambda_output_path" {
   default = "../../lambda_function.zip"
 }
 
-variable "create_bucket" {
+variable "create_resources" {
   type        = bool
   description = "Bool to create bucket"
 }

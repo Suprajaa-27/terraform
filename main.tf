@@ -11,7 +11,7 @@ module "lambda_s3_trigger" {
   trigger_events       = var.trigger_events
   filter_prefix        = var.filter_prefix
   filter_suffix        = var.filter_suffix
-  create_bucket =  var.create_bucket
+  create_resources =  var.create_resources
 
 }
 
