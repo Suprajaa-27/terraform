@@ -48,6 +48,9 @@ variable "lambda_output_path" {
   default = "${path.module}/../../lambda_function.zip"
 }
 
+variable "filename" {
+  description = "The path to the Lambda function deployment package (ZIP file)."
+}
 # variable "create_bucket" {
 #   type        = bool
 #   description = "Bool to create bucket"
