@@ -1,15 +1,15 @@
-variable bucket_name {
-    type = string
-    description = "Bucket where files are uploaded to trigger lambda function"
+variable "bucket_name" {
+  type        = string
+  description = "Bucket where files are uploaded to trigger lambda function"
 }
 
-variable region {
-    type = string
-    description = "Region in which terraform will be deployed"
+variable "region" {
+  type        = string
+  description = "Region in which terraform will be deployed"
 }
 
 variable "function_name" {
-  type = string
+  type        = string
   description = "The name of the Lambda Function."
 }
 
@@ -44,4 +44,10 @@ variable "source_dir" {
 variable "output_path" {
   description = "Output path for the Lambda function zip file"
   type        = string
+}
+
+variable "create_bucket" {
+  type        = bool
+  description = "Bool to create bucket"
+  default     = true
 }

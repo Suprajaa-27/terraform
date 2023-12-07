@@ -1,5 +1,5 @@
 module "s3-bucket" {
-  count = var.create_bucket ? 1 : 0
+  count   = var.create_bucket ? 1 : 0
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "3.15"
 

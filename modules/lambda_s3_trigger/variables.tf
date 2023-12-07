@@ -5,7 +5,7 @@ variable "region" {
 }
 
 variable "lambda_function_name" {
-  type = string
+  type        = string
   description = "The name of the Lambda Function."
 }
 
@@ -42,7 +42,7 @@ variable "filter_suffix" {
 
 variable "bucket_name" {
   description = "S3 bucket to trigger lambda function when a json file is created"
-   
+
 }
 
 variable "s3_bucket_id" {
@@ -60,6 +60,6 @@ variable "output_path" {
 }
 
 variable "create_bucket" {
-  type = bool
+  type        = bool
   description = "Bool to create bucket"
 }
