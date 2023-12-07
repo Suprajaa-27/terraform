@@ -33,8 +33,12 @@ resource "aws_s3_bucket_versioning" "versioning_example" {
   }
 }
 resource "aws_s3_bucket_object_lock_configuration" "example" {
+<<<<<<< HEAD
   count = var.create_bucket ? 1 : 0
   bucket = aws_s3_bucket.example.id
+=======
+  bucket = aws_s3_bucket.s3_bucket.id
+>>>>>>> 098fd19a38688e9fea141f4e842a39730c6e64bb
 
   rule {
     default_retention {
