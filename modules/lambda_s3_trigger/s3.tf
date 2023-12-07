@@ -35,6 +35,8 @@ resource "aws_s3_bucket_versioning" "object-versioning" {
 resource "aws_s3_bucket_object_lock_configuration" "object-lock" {
   
   bucket = aws_s3_bucket.s3_bucket.id
+  object_lock_enabled = true
+
   rule {
     default_retention {
       mode = "COMPLIANCE"

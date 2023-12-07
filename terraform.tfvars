@@ -6,5 +6,5 @@ runtime       = "python3.11"
 bucket_name   = "s3-bucket-to-trigger-lambda-function"
 
 filename = "lambda_function.zip"
-create_resources = true
+
 
