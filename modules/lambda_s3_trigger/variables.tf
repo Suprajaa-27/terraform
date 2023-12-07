@@ -17,7 +17,7 @@ variable "runtime" {
   description = "The Lambda function runtime."
 }
 
-variable "role_arn" {
+variable "lambda_role_arn" {
   description = "The ARN of the IAM role for the Lambda function."
   type = string
 }

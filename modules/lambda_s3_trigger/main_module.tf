@@ -3,7 +3,7 @@ resource "aws_lambda_function" "s3_trigger_lambda" {
   function_name = var.lambda_function_name
   handler       = var.handler
   runtime       = var.runtime
-  role          = var.role_arn
+  role          = var.lambda_role_arn
   filename      = var.filename
 }
 
