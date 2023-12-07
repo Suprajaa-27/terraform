@@ -5,7 +5,7 @@ resource "aws_s3_bucket" "s3_bucket" {
 }
 resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
   count = var.create_bucket ? 1 : 0
-  bucket = aws_s3_bucket.s3_bucket.id
+  bucket = aws_s3_bucket.s3_bucket[count.index].id
   rule {
     id = "object-lifecycle-rule"
 
@@ -27,14 +27,14 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
 
 resource "aws_s3_bucket_versioning" "object-versioning" {
   count = var.create_bucket ? 1 : 0
-  bucket = aws_s3_bucket.s3_bucket.id
+  bucket = aws_s3_bucket.s3_bucket[count.index].id
   versioning_configuration {
     status = "Enabled"
   }
 }
 resource "aws_s3_bucket_object_lock_configuration" "object-lock" {
   count = var.create_bucket ? 1 : 0
-  bucket = aws_s3_bucket.s3_bucket.id
+  bucket = aws_s3_bucket.s3_bucket[count.index].id
   rule {
     default_retention {
       mode = "COMPLIANCE"
