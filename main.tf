@@ -11,8 +11,8 @@ module "lambda_s3_trigger" {
   trigger_events       = var.trigger_events
   filter_prefix        = var.filter_prefix
   filter_suffix        = var.filter_suffix
-  source_dir           = var.source_dir
-  output_path          = var.output_path
+  source_dir           = var.lambda_source_dir
+  output_path          = var.lambda_output_path
 
 }
 
