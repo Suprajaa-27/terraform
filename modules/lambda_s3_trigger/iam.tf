@@ -63,8 +63,8 @@ resource "aws_iam_policy" "s3_policy" {
         "s3:PutObject"
       ],
       "Resource": [
-        "${aws_s3_bucket.s3_bucket.arn}",
-        "${aws_s3_bucket.s3_bucket.arn}/*"
+        "${aws_s3_bucket.s3_bucket[count.index].arn}",
+        "${aws_s3_bucket.s3_bucket[count.index].arn}/*"
       ]
     }
   ]
@@ -83,6 +83,6 @@ resource "aws_lambda_permission" "s3_trigger_permission" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.s3_trigger_lambda.function_name
   principal     = "s3.amazonaws.com"
-  source_arn    = aws_s3_bucket.s3_bucket.arn
+  source_arn    = aws_s3_bucket.s3_bucket[count.index].arn
 }
 
