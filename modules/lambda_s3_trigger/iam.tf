@@ -81,8 +81,8 @@ EOF
 
 resource "aws_iam_role_policy_attachment" "lambda_s3_policy_attachment" {
   
-  policy_arn = aws_iam_policy.s3_policy.arn
-  role       = aws_iam_role.aws_lambda_role.name
+  policy_arn = aws_iam_policy.s3_policy[count.index].arn
+  role       = aws_iam_role.aws_lambda_role[count.index].name
 }
 
 resource "aws_lambda_permission" "s3_trigger_permission" {
