@@ -24,7 +24,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
 }
 
 resource "aws_s3_bucket_object_lock_configuration" "example" {
-  bucket = aws_s3_bucket.example.id
+  bucket = aws_s3_bucket.s3_bucket.id
 
   rule {
     default_retention {
