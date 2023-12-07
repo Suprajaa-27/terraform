@@ -1,6 +1,5 @@
 # Define an IAM role for the Lambda function
 resource "aws_iam_role" "aws_lambda_role" {
-  count = var.create_resources ? 1 : 0
   name = "aws-lambda-role"
 
   assume_role_policy = jsonencode({
@@ -18,7 +17,6 @@ resource "aws_iam_role" "aws_lambda_role" {
 }
 
 resource "aws_iam_policy" "iam_policy_for_lambda" {
-  count = var.create_resources ? 1 : 0
 
   name        = "aws_iam_policy_for_aws_lambda_role"
   path        = "/"
@@ -44,13 +42,13 @@ EOF
 # Policy Attachment on the role.
 
 resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
-  count = var.create_resources ? 1 : 0
+  
   role       = aws_iam_role.aws_lambda_role.name
   policy_arn = aws_iam_policy.iam_policy_for_lambda.arn
 }
 
 resource "aws_iam_policy" "s3_policy" {
-  count = var.create_resources ? 1 : 0
+  
   name        = "s3_access_policy"
   description = "Policy for Lambda function to access S3"
 
@@ -78,17 +76,17 @@ EOF
 
 
 resource "aws_iam_role_policy_attachment" "lambda_s3_policy_attachment" {
-  count = var.create_resources ? 1 : 0
+  
   policy_arn = aws_iam_policy.s3_policy.arn
   role       = aws_iam_role.aws_lambda_role.name
 }
 
 resource "aws_lambda_permission" "s3_trigger_permission" {
-  count = var.create_resources ? 1 : 0
+  
   statement_id  = "AllowExecutionFromS3Bucket"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.s3_trigger_lambda.function_name
   principal     = "s3.amazonaws.com"
-  source_arn    = aws_s3_bucket.s3_bucket[count.index].arn
+  source_arn    = aws_s3_bucket.s3_bucket.arn
 }
 
