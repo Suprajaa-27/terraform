@@ -46,8 +46,8 @@ EOF
 resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
   count = var.create_resources ? 1 : 0
   
-  role       = aws_iam_role.aws_lambda_role.name
-  policy_arn = aws_iam_policy.iam_policy_for_lambda.arn
+  role       = aws_iam_role.aws_lambda_role[count.index].name
+  policy_arn = aws_iam_policy.iam_policy_for_lambda[count.index].arn
 }
 
 resource "aws_iam_policy" "s3_policy" {
@@ -69,8 +69,8 @@ resource "aws_iam_policy" "s3_policy" {
         "s3:PutObject"
       ],
       "Resource": [
-        "${aws_s3_bucket.s3_bucket.arn}",
-        "${aws_s3_bucket.s3_bucket.arn}/*"
+        "${aws_s3_bucket.s3_bucket[count.index].arn}",
+        "${aws_s3_bucket.s3_bucket[count.index].arn}/*"
       ]
     }
   ]
