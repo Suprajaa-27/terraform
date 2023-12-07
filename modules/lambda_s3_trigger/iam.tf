@@ -1,6 +1,5 @@
 # Define an IAM role for the Lambda function
 resource "aws_iam_role" "aws_lambda_role" {
-  count = var.create_resources ? 1 : 0
   name = "aws-lambda-role"
 
   assume_role_policy = jsonencode({
@@ -17,13 +16,13 @@ resource "aws_iam_role" "aws_lambda_role" {
   })
 }
 
-resource "aws_iam_policy" "iam_policy_for_lambda" {
-  count = var.create_resources ? 1 : 0
+# IAM Policy for cloud watch logs
+resource "aws_iam_policy" "cloud_watch_iam_policy" {
 
-  name        = "aws_iam_policy_for_aws_lambda_role"
-  path        = "/"
-  description = "AWS IAM Policy for managing aws lambda role"
-  policy      = <<EOF
+  name         = "aws_iam_policy_for_cloud_watch"
+  path         = "/"
+  description  = "AWS IAM Policy for cloud watch"
+  policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -41,21 +40,18 @@ resource "aws_iam_policy" "iam_policy_for_lambda" {
 EOF
 }
 
-# Policy Attachment on the role.
+# Policy Attachment to the role.
 
-resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
-  count = var.create_resources ? 1 : 0
-  
-  role       = aws_iam_role.aws_lambda_role[count.index].name
-  policy_arn = aws_iam_policy.iam_policy_for_lambda[count.index].arn
+resource "aws_iam_role_policy_attachment" "attach_cloud_watch_policy_to_lambda_role" {
+  role        = aws_iam_role.aws_lambda_role.name
+  policy_arn  = aws_iam_policy.cloud_watch_iam_policy.arn
 }
 
-resource "aws_iam_policy" "s3_policy" {
-  count = var.create_resources ? 1 : 0
-  
+# Policy that allow lambda to access s3.
+resource "aws_iam_policy" "s3_access_policy" {
   name        = "s3_access_policy"
   description = "Policy for Lambda function to access S3"
-
+  
   # Define the policy document with appropriate permissions for S3 access
   policy = <<EOF
 {
@@ -69,8 +65,8 @@ resource "aws_iam_policy" "s3_policy" {
         "s3:PutObject"
       ],
       "Resource": [
-        "${aws_s3_bucket.s3_bucket[count.index].arn}",
-        "${aws_s3_bucket.s3_bucket[count.index].arn}/*"
+        "${aws_s3_bucket.s3_bucket.arn}",
+        "${aws_s3_bucket.s3_bucket.arn}/*"
       ]
     }
   ]
@@ -78,19 +74,17 @@ resource "aws_iam_policy" "s3_policy" {
 EOF
 }
 
-
+# S3 Policy attachment to Lambda role.
 resource "aws_iam_role_policy_attachment" "lambda_s3_policy_attachment" {
-  count = var.create_resources ? 1 : 0
-  policy_arn = aws_iam_policy.s3_policy[count.index].arn
-  role       = aws_iam_role.aws_lambda_role[count.index].name
+  role       = aws_iam_role.aws_lambda_role.name
+  policy_arn = aws_iam_policy.s3_access_policy.arn
 }
 
+# AWS Lambda permission to allow S3 to invoke it.
 resource "aws_lambda_permission" "s3_trigger_permission" {
-  count = var.create_resources ? 1 : 0
   statement_id  = "AllowExecutionFromS3Bucket"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.s3_trigger_lambda.function_name
   principal     = "s3.amazonaws.com"
-  source_arn    = aws_s3_bucket.s3_bucket[count.index].arn
+  source_arn    = "${aws_s3_bucket.s3_bucket.arn}"
 }
-

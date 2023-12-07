@@ -17,7 +17,7 @@ variable "runtime" {
   description = "The Lambda function runtime."
 }
 
-variable "lambda_role_arn" {
+variable "role_arn" {
   description = "The ARN of the IAM role for the Lambda function."
   type = string
 }
@@ -63,7 +63,4 @@ variable "lambda_output_path" {
   default = "../../lambda_function.zip"
 }
 
-variable "create_resources" {
-  type        = bool
-  description = "Bool to create bucket"
-}
+
