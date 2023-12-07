@@ -5,7 +5,7 @@ module "lambda_s3_trigger" {
   lambda_function_name = var.function_name
   handler              = var.handler
   runtime              = var.runtime
-  role_arn      = module.lambda_s3_trigger.role_arn
+  role_arn      = module.lambda_s3_trigger.lambda_role_arn
   filename             = "${path.module}/${var.filename}"
   s3_bucket_id         = module.lambda_s3_trigger.s3_bucket_id
   trigger_events       = var.trigger_events
