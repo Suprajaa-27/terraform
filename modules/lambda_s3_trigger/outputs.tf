@@ -12,7 +12,7 @@ output "s3_trigger_id" {
 
 output "s3_bucket_id" {
   description = "The ID of s3 bucket."
-  value       = aws_s3_bucket.s3_bucket.id
+  value       = aws_s3_bucket.s3_bucket[count.index]
 }
 
 output "s3_bucket_arn" {
