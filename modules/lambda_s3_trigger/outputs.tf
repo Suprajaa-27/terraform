@@ -1,9 +1,9 @@
 # # modules/lambda_s3_trigger/outputs.tf
 
-# output "lambda_function_arn" {
-#   description = "The ARN of the created Lambda function."
-#   value       = aws_lambda_function.s3_trigger_lambda.arn
-# }
+output "lambda_function_arn" {
+  description = "The ARN of the created Lambda function."
+  value       = aws_lambda_function.s3_trigger_lambda[*].arn
+}
 
 # output "s3_trigger_id" {
 #   description = "The ID of the created S3 trigger."
