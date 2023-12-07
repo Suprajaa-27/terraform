@@ -25,21 +25,16 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
   }
 }
 
-resource "aws_s3_bucket_versioning" "versioning_example" {
+resource "aws_s3_bucket_versioning" "object-versioning" {
   count = var.create_bucket ? 1 : 0
-  bucket = aws_s3_bucket.example.id
+  bucket = aws_s3_bucket.s3_bucket.id
   versioning_configuration {
     status = "Enabled"
   }
 }
-resource "aws_s3_bucket_object_lock_configuration" "example" {
-<<<<<<< HEAD
+resource "aws_s3_bucket_object_lock_configuration" "object-lock" {
   count = var.create_bucket ? 1 : 0
-  bucket = aws_s3_bucket.example.id
-=======
   bucket = aws_s3_bucket.s3_bucket.id
->>>>>>> 098fd19a38688e9fea141f4e842a39730c6e64bb
-
   rule {
     default_retention {
       mode = "COMPLIANCE"
