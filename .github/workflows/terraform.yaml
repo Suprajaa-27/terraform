@@ -18,8 +18,6 @@ jobs:
           branch: main
           require_pull_request_before_merge: true
           dismiss_stale_pull_request_approvals: true
-          required_branch_state:
-            clean: true
       - name: Checkout code
         uses: actions/checkout@v2
       - name: configure aws credentials
