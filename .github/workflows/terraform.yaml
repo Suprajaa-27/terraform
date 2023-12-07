@@ -18,6 +18,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Check for branch protection rules
+      uses: actions/branch-protection@v2
+      with:
+        branch: main
+        require_pull_request_before_merge: true
+        dismiss_stale_pull_request_approvals: true
+        required_status_checks:
+          - name: Build
+            type: periodic
+            occasions: 2
+            context: continuous-integration
+        required_pull_request_reviews:
+          - required_status_checks:
+            - name: Approved
+        required_branch_state:
+          clean: true
+             
     - name: Checkout code
       uses: actions/checkout@v2
 
