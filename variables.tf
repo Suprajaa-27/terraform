@@ -36,3 +36,12 @@ variable "trigger_events" {
   default     = ["s3:ObjectCreated:*"]
 }
 
+variable "source_dir" {
+  description = "Source directory for Lambda function code"
+  type        = string
+}
+
+variable "output_path" {
+  description = "Output path for the Lambda function zip file"
+  type        = string
+}

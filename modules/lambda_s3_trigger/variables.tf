@@ -48,3 +48,28 @@ variable "bucket_name" {
 variable "s3_bucket_id" {
   description = "S3 bucket to trigger lambda function when a json file is created"
 }
+
+variable "source_dir" {
+  description = "Source directory for Lambda function code"
+  type        = string
+}
+
+variable "output_path" {
+  description = "Output path for the Lambda function zip file"
+  type        = string
+}
+
+variable "create_bucket" {
+  type = bool
+  description = "Bool to create bucket"
+}
+
+variable "enable_object_lock" {
+  type = bool
+  description = "Bool to create object lock"
+}
+
+variable "enable_object_protection" {
+  type = bool
+  description = "Bool to create object protection"
+}
