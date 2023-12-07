@@ -5,7 +5,7 @@ variable "region" {
 }
 
 variable "lambda_function_name" {
-  type = string
+  type        = string
   description = "The name of the Lambda Function."
 }
 
@@ -42,9 +42,22 @@ variable "filter_suffix" {
 
 variable "bucket_name" {
   description = "S3 bucket to trigger lambda function when a json file is created"
-   
+
 }
 
 variable "s3_bucket_id" {
   description = "S3 bucket to trigger lambda function when a json file is created"
+}
+
+variable "lambda_source_dir" {
+  description = "Source directory for Lambda function code"
+  type        = string
+  default = "../../src"
+
+}
+
+variable "lambda_output_path" {
+  description = "Output path for the Lambda function zip file"
+  type        = string
+  default = "../../lambda_function.zip"
 }
