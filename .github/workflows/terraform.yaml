@@ -1,61 +1,48 @@
 name: Terraform CI/CD
-
-#To do : branch protection rule , auto pr , to push through only feature branch , approval for pr
-
-on:
+'on':
   push:
     branches:
       - main
   pull_request:
     branches:
       - main
-
 permissions:
-  id-token: write # This is required for requesting the JWT
-
+  id-token: write
 jobs:
   terraform:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Check for branch protection rules
-      uses: actions/branch-protection@v2
-      with:
-        branch: main
-        require_pull_request_before_merge: true
-        dismiss_stale_pull_request_approvals: true
-        required_status_checks:
-          - name: Build
-            type: periodic
-            occasions: 2
-            context: continuous-integration
-        required_pull_request_reviews:
-          - required_status_checks:
-            - name: Approved
-        required_branch_state:
-          clean: true
-             
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: configure aws credentials
-      uses: aws-actions/configure-aws-credentials@v3
-      with:
-        role-to-assume: arn:aws:iam::388921471165:role/github-to-aws-oidc
-        aws-region: eu-north-1
-
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-
-    - name: Terraform Init
-      run: terraform init
-
-    - name: Terraform Plan
-      run: terraform plan 
-
-    - name: Terraform Apply
-      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-      run: terraform apply -auto-approve
-
-    - name: Terraform Validate
-      run: terraform validate
+      - name: Check for branch protection rules
+        uses: actions/branch-protection@v2
+        with:
+          branch: main
+          require_pull_request_before_merge: true
+          dismiss_stale_pull_request_approvals: true
+          required_status_checks:
+            - name: Build
+              type: periodic
+              occasions: 2
+              context: continuous-integration
+          required_pull_request_reviews:
+            - required_status_checks:
+                - name: Approved
+          required_branch_state:
+            clean: true
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: 'arn:aws:iam::388921471165:role/github-to-aws-oidc'
+          aws-region: eu-north-1
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+      - name: Terraform Init
+        run: terraform init
+      - name: Terraform Plan
+        run: terraform plan
+      - name: Terraform Apply
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve
+      - name: Terraform Validate
+        run: terraform validate
