@@ -1,5 +1,3 @@
-# modules/lambda_s3_trigger/main.tf
-
 resource "aws_lambda_function" "s3_trigger_lambda" {
   function_name = var.lambda_function_name
   handler       = var.handler

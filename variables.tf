@@ -46,8 +46,8 @@ variable "output_path" {
   type        = string
 }
 
-variable "create_bucket" {
-  type        = bool
-  description = "Bool to create bucket"
-  default     = true
-}
+# variable "create_bucket" {
+#   type        = bool
+#   description = "Bool to create bucket"
+#   default     = true
+# }

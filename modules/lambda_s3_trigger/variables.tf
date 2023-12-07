@@ -58,8 +58,3 @@ variable "output_path" {
   description = "Output path for the Lambda function zip file"
   type        = string
 }
-
-variable "create_bucket" {
-  type        = bool
-  description = "Bool to create bucket"
-}
