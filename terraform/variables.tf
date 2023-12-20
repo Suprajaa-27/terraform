@@ -30,20 +30,20 @@ variable "runtime" {
 #   description = "The path to the Lambda function deployment package (ZIP file)."
 # }
 
-variable "trigger_events" {
-  description = "List of S3 trigger events."
-  default     = ["s3:ObjectCreated:*"]
-}
+# variable "trigger_events" {
+#   description = "List of S3 trigger events."
+#   default     = ["s3:ObjectCreated:*"]
+# }
 
-variable "filter_prefix" {
-  description = "Prefix filter for S3 events."
-  default     = ""
-}
+# variable "filter_prefix" {
+#   description = "Prefix filter for S3 events."
+#   default     = ""
+# }
 
-variable "filter_suffix" {
-  description = "Suffix filter for S3 events."
-  default     = ".json"
-}
+# variable "filter_suffix" {
+#   description = "Suffix filter for S3 events."
+#   default     = ".json"
+# }
 
 variable "bucket_name" {
   description = "S3 bucket to trigger lambda function when a json file is created"

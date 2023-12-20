@@ -1,7 +1,5 @@
 # Resource to create a lambda function
 
-# Resource to create a lambda function
-
 resource "aws_lambda_function" "s3_trigger_lambda" {
   function_name = var.lambda_function_name
   handler       = var.handler
@@ -21,14 +19,15 @@ resource "aws_lambda_function" "s3_trigger_lambda" {
 }
 #Resource to configure Lambda as an event trigger for S3 bucket.
 resource "aws_s3_bucket_notification" "s3_event_trigger" {
-  bucket = aws_s3_bucket.s3_bucket.id
+  bucket = "s3-trigger-lambda-function-test12345"
 
   lambda_function {
     lambda_function_arn = aws_lambda_function.s3_trigger_lambda.arn
-    events              = var.trigger_events
-    filter_prefix       = var.filter_prefix
-    filter_suffix       = var.filter_suffix
+    events              = ["s3:ObjectCreated:*"]
+    filter_prefix       = "AWSLogs/"
+    filter_suffix       = ".log"
   }
+   depends_on = [aws_lambda_permission.s3_trigger_permission]
 }
 
 # To Package lambda function code
